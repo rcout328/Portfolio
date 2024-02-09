@@ -78,13 +78,13 @@ const Project = () => {
       >
         <div className="container mx-auto py-16">
           <motion.h1
-            className="text-4xl font-bold mb-8 text-center"
+            className="text-4xl md:text-5xl font-bold mb-8 text-center"
             variants={itemVariants}
           >
             Project Showcase
           </motion.h1>
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8"
             variants={itemVariants}
           >
             {projects.map((project, index) => (
@@ -105,7 +105,7 @@ const Project = () => {
                     animate={{ opacity: 1, transition: { duration: 0.5 } }}
                   />
                   <motion.h2
-                    className="text-xl font-bold mb-2"
+                    className="text-xl md:text-2xl font-bold mb-2"
                     variants={itemVariants}
                   >
                     {project.title}

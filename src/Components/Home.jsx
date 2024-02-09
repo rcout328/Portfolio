@@ -35,7 +35,7 @@ const Home = () => {
     <>
       <NavBar />
       <motion.div
-        className={`h-screen flex justify-center items-center ${
+        className={`min-h-screen flex flex-col justify-center items-center ${
           isDarkMode
             ? "bg-black text-white"
             : "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
@@ -58,14 +58,16 @@ const Home = () => {
               {isDarkMode ? "Light Mode" : "Dark Mode"}
             </button>
           </div>
-          <h1 className="text-5xl font-extrabold mb-4">Varun Israni</h1>
+          <h1 className="text-3xl md:text-5xl font-extrabold mb-4">
+            Varun Israni
+          </h1>
           <motion.p className="text-lg mb-6" variants={textVariants}>
             Welcome to my portfolio! I am a passionate web developer dedicated
             to crafting exceptional user experiences. Lets turn ideas into
             reality.
           </motion.p>
           <motion.div
-            className="flex justify-center space-x-4"
+            className="flex flex-col items-center space-y-4"
             variants={textVariants}
           >
             <motion.a
