@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import Navbar from "./Navbar";
 
 const Project = () => {
@@ -53,43 +54,77 @@ const Project = () => {
     // Add more projects as needed
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+  };
+
   return (
     <>
       <Navbar />
-      <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+      <motion.div
+        className="bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <div className="container mx-auto py-16">
-          <h1 className="text-4xl font-bold mb-8 text-center">
+          <motion.h1
+            className="text-4xl font-bold mb-8 text-center"
+            variants={itemVariants}
+          >
             Project Showcase
-          </h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          </motion.h1>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={itemVariants}
+          >
             {projects.map((project, index) => (
-              <a
+              <motion.a
                 key={index}
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block transform transition-transform hover:scale-105"
+                variants={itemVariants}
               >
                 <div className="bg-white p-6 rounded-lg shadow-md border border-gray-300">
-                  <img
+                  <motion.img
                     src={project.image}
                     alt={project.title}
                     className="mb-4 object-cover w-full h-48 rounded-md"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, transition: { duration: 0.5 } }}
                   />
-                  <h2 className="text-xl font-bold mb-2">{project.title}</h2>
-                  <p className="text-gray-600">{project.description}</p>
-                  <div className="mt-4">
+                  <motion.h2
+                    className="text-xl font-bold mb-2"
+                    variants={itemVariants}
+                  >
+                    {project.title}
+                  </motion.h2>
+                  <motion.p className="text-gray-600" variants={itemVariants}>
+                    {project.description}
+                  </motion.p>
+                  <motion.div className="mt-4" variants={itemVariants}>
                     <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
                       View Project
                     </button>
-                  </div>
+                  </motion.div>
                   {/* Add more project details or links as needed */}
                 </div>
-              </a>
+              </motion.a>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

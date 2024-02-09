@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import Navbar from "./Navbar";
 
 const ContactForm = () => {
@@ -35,12 +36,22 @@ const ContactForm = () => {
     <>
       <Navbar />
       <div className="h-screen flex justify-center items-center bg-gradient-to-r from-blue-500 to-purple-500 text-white">
-        <div className="bg-white p-8 rounded-lg shadow-md">
+        <motion.div
+          className="bg-white p-8 rounded-lg shadow-md"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, type: "spring" }}
+        >
           <h1 className="text-3xl font-semibold mb-6 text-center text-gray-800">
             Contact Me
           </h1>
           <form onSubmit={handleSubmit}>
-            <div className="flex flex-col space-y-4">
+            <motion.div
+              className="flex flex-col space-y-4"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4, type: "spring" }}
+            >
               <input
                 type="text"
                 name="name"
@@ -76,15 +87,17 @@ const ContactForm = () => {
                 className="px-4 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
                 required
               ></textarea>
-              <button
+              <motion.button
                 type="submit"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 className="px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-700"
               >
                 Submit
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
           </form>
-        </div>
+        </motion.div>
       </div>
     </>
   );

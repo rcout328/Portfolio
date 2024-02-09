@@ -1,3 +1,6 @@
+import React from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import Navbar from "./Navbar";
 
 const Services = () => {
@@ -10,17 +13,47 @@ const Services = () => {
     "https://codekitapp.com/images/help/free-tailwind-icon@2x.png",
   ];
 
+  const controls = useAnimation();
+  const [ref, inView] = useInView({ triggerOnce: true });
+
+  React.useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: { opacity: 1, scale: 1 },
+  };
+
   return (
     <>
       <Navbar />
       <div className="h-screen flex justify-center items-center bg-gradient-to-r from-blue-500 to-purple-500 text-white">
         <div className="text-center max-w-2xl">
           <h1 className="text-4xl font-bold mb-8">Our Services</h1>
-          <div className="flex justify-center space-x-4">
+          <motion.div
+            className="flex justify-center space-x-4"
+            variants={containerVariants}
+            initial="hidden"
+            animate={controls}
+            ref={ref}
+          >
             {serviceLogos.map((logo, index) => (
-              <div
+              <motion.div
                 key={index}
                 className="rounded-full overflow-hidden border-4 border-white transform transition-transform hover:scale-110"
+                variants={itemVariants}
               >
                 <img
                   src={logo}
@@ -28,9 +61,9 @@ const Services = () => {
                   height={120}
                   width={120}
                 />
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
           {/* Add more sections like Experience, Education, etc., as needed */}
         </div>
       </div>
